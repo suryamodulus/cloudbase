@@ -1,9 +1,11 @@
 import {
   ArrayNotEmpty,
   IsArray,
+  IsEnum,
   IsNotEmpty,
   IsOptional,
 } from 'class-validator';
+import { ServiceTypeEnum } from '../constants';
 
 export class CreateServiceDto {
   @IsNotEmpty()
@@ -11,6 +13,9 @@ export class CreateServiceDto {
 
   @IsNotEmpty()
   image: string;
+
+  @IsEnum(ServiceTypeEnum)
+  type: ServiceTypeEnum;
 
   @IsOptional()
   @IsNotEmpty()

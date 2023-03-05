@@ -62,6 +62,17 @@ export class ServicesController {
     });
   }
 
+  @Post(':id/restart')
+  async restartContainer(@Param('id') id: string) {
+    const service = await this.servicesService.service({
+      id,
+    });
+    if (!service) {
+      throw new NotFoundException();
+    }
+    return this.servicesService.restartService({ id });
+  }
+
   @Delete(':id')
   async remove(@Param('id') id: string) {
     const service = await this.servicesService.service({

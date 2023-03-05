@@ -1,8 +1,6 @@
 import { Process, Processor } from '@nestjs/bull';
-import { Prisma } from '@prisma/client';
 import { Job } from 'bull';
 import * as Docker from 'dockerode';
-import { resolve } from 'path';
 import { ServiceStatusEnum } from 'src/services/constants';
 import { ServicesService } from './services.service';
 
