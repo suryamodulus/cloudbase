@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./cloudbase.db"
+}
+
+model Project {
+  id        String    @id @default(cuid())
+  name      String
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  services  Service[]
+
+  @@map("project")
+}
+
+model Service {
+  id           String        @id @default(cuid())
+  name         String
+  image        String
+  tag          String        @default("latest")
+  cpus         String
+  memory       String
+  status       String
+  project      Project       @relation(fields: [projectId], references: [id])
+  projectId    String        @map("project_id")
+  envVariables EnvVariable[]
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  @@map("service")
+}
+
+model EnvVariable {
+  id        String   @id @default(cuid())
+  key       String
+  value     String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  serviceId String   @unique @map("service_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("env_variable")
+}
