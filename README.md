@@ -15,15 +15,15 @@ To solve above mentioned issues, we are building an All-in-one application manag
 ## How it works - (Current scope)
 
 - Install Cloudbase on your server
-- Go to the Web UI (Pending)
+- Go to the web-ui (Pending)
 - Login
 - Create a project
-- Add Service to project
+- Add service to project
 - Configuration
     - Configure resources (CPU, RAM)
     - Add ENV variables
-    - Custom domains (Pending)
-- See Logs - Pending
+    - Add custom domains (Pending)
+- See Logs (Pending)
 - Update Configuration (Pending)
 - Restart Service
 - Delete Service
@@ -35,7 +35,7 @@ To solve above mentioned issues, we are building an All-in-one application manag
 ## Pre-Requisites
 
 - NodeJS v16+
-- Redis (Remove dependency in future)
+- Redis
 - Docker
 - Caddy
 
