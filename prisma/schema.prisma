@@ -28,6 +28,9 @@ model Service {
   cpus         String
   memory       String
   status       String
+  type String
+  errorLog     String?       @map("error_log")
+  customDomain String?       @map("custom_domain")
   project      Project       @relation(fields: [projectId], references: [id])
   projectId    String        @map("project_id")
   envVariables EnvVariable[]

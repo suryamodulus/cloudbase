@@ -14,13 +14,13 @@ export class ServicesService {
   async service(
     serviceWhereUniqueInput: Prisma.ServiceWhereUniqueInput,
   ): Promise<Service | null> {
-    const service = await this.db.service.findUnique({
+    return this.db.service.findUnique({
       where: serviceWhereUniqueInput,
+      include: {
+        envVariables: true,
+        project: true,
+      },
     });
-    if (!service) {
-      throw new NotFoundException();
-    }
-    return service;
   }
 
   async services(params: {
@@ -35,6 +35,7 @@ export class ServicesService {
       where,
       include: {
         envVariables: true,
+        project: true,
       },
     });
   }
@@ -56,12 +57,6 @@ export class ServicesService {
     data: Prisma.ServiceUncheckedUpdateInput;
   }): Promise<Service> {
     const { where, data } = params;
-    const service = await this.db.service.findUnique({
-      where,
-    });
-    if (!service) {
-      throw new NotFoundException();
-    }
     return this.db.service.update({
       data,
       where,
@@ -71,12 +66,6 @@ export class ServicesService {
   async deleteService(
     where: Prisma.ServiceWhereUniqueInput,
   ): Promise<Service | any> {
-    const service = await this.db.service.findUnique({
-      where,
-    });
-    if (!service) {
-      throw new NotFoundException();
-    }
     return this.db.service.delete({
       where,
     });

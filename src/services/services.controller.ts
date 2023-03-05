@@ -7,12 +7,13 @@ import {
   Param,
   Delete,
   Query,
+  NotFoundException,
 } from '@nestjs/common';
 import { ServicesService } from './services.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 import { ListQueryDefaultDTO } from 'src/common/dto/list-query.dto';
-import { ServiceStatusEnum } from 'src/projects/constants';
+import { ServiceStatusEnum } from 'src/services/constants';
 
 @Controller('api/services')
 export class ServicesController {
@@ -36,12 +37,25 @@ export class ServicesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.servicesService.service({ id });
+  async findOne(@Param('id') id: string) {
+    const service = await this.servicesService.service({ id });
+    if (!service) {
+      throw new NotFoundException();
+    }
+    return service;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateServiceDto: UpdateServiceDto,
+  ) {
+    const service = await this.servicesService.service({
+      id,
+    });
+    if (!service) {
+      throw new NotFoundException();
+    }
     return this.servicesService.updateService({
       where: { id },
       data: updateServiceDto,
@@ -49,7 +63,13 @@ export class ServicesController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
+    const service = await this.servicesService.service({
+      id,
+    });
+    if (!service) {
+      throw new NotFoundException();
+    }
     return this.servicesService.deleteService({ id });
   }
 }

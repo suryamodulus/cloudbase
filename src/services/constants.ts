@@ -5,3 +5,8 @@ export enum ServiceStatusEnum {
   STOPPED = 'stopped',
   ERRORED = 'errored',
 }
+
+export enum ServiceTypeEnum {
+  PUBLIC = 'public',
+  PRIVATE = 'private',
+}
