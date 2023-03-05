@@ -15,15 +15,16 @@ To solve above mentioned issues, we are building an All-in-one application manag
 ## How it works - (Current scope)
 
 - Install Cloudbase on your server
-- Go to the Web UI - Pending
+- Go to the Web UI (Pending)
+- Login
 - Create a project
 - Add Service to project
 - Configuration
     - Configure resources (CPU, RAM)
     - Add ENV variables
-    - Custom domains - Pending
+    - Custom domains (Pending)
 - See Logs - Pending
-- Update Configuration - Pending
+- Update Configuration (Pending)
 - Restart Service
 - Delete Service
 

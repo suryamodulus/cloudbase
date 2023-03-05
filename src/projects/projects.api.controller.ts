@@ -7,14 +7,17 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { ListQueryDefaultDTO } from 'src/common/dto/list-query.dto';
+import { BasicAuthGaurd } from 'src/auth/auth-basic.guard';
 
+@UseGuards(BasicAuthGaurd)
 @Controller('api/projects')
-export class ProjectsController {
+export class ProjectsApiController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()

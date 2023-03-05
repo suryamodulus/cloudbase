@@ -8,15 +8,18 @@ import {
   Delete,
   Query,
   NotFoundException,
+  UseGuards,
 } from '@nestjs/common';
 import { ServicesService } from './services.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 import { ListQueryDefaultDTO } from 'src/common/dto/list-query.dto';
 import { ServiceStatusEnum } from 'src/services/constants';
+import { BasicAuthGaurd } from 'src/auth/auth-basic.guard';
 
+@UseGuards(BasicAuthGaurd)
 @Controller('api/services')
-export class ServicesController {
+export class ServicesApiController {
   constructor(private readonly servicesService: ServicesService) {}
 
   @Post()

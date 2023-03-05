@@ -5,6 +5,8 @@ import { ServicesModule } from './services/services.module';
 import { BullModule } from '@nestjs/bull';
 import { config } from './config';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -16,8 +18,10 @@ import { ConfigModule } from '@nestjs/config';
         port: config.REDIS_PORT,
       },
     }),
+    AuthModule,
     ProjectsModule,
     ServicesModule,
   ],
+  providers: [AppController],
 })
 export class AppModule {}

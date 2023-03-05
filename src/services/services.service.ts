@@ -3,6 +3,7 @@ import {
   HttpException,
   Injectable,
   NotFoundException,
+  UseGuards,
 } from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
 import { Service, Prisma } from '@Prisma/client';
